@@ -125,18 +125,146 @@ activities.addEventListener("change", function(event) {
 
 // The "Credit Card" payment option should be selected by default and result in the display of the #credit-card div, and hide the "Paypal" and "Bitcoin information.
 
+document.getElementById("paypal").style.display = "none";
+document.getElementById("bitcoin").style.display = "none";
+const paymentSection = document.getElementById("payment");
+paymentSection.childNodes[1].style.display = "none";
+paymentSection.addEventListener("change", function(event) {
+	const currentPaymentType = paymentSection.value;
+	if (currentPaymentType === "credit card") {
+		document.getElementById("credit-card").style.display = "";
+		document.getElementById("paypal").style.display = "none";
+		document.getElementById("bitcoin").style.display = "none";
+	} else if (currentPaymentType === "paypal") {
+		document.getElementById("credit-card").style.display =
+			"none";
+		document.getElementById("paypal").style.display = "";
+		document.getElementById("bitcoin").style.display = "none";
+	} else if (currentPaymentType === "bitcoin") {
+		document.getElementById("credit-card").style.display =
+			"none";
+		document.getElementById("paypal").style.display = "none";
+		document.getElementById("bitcoin").style.display = "";
+	}
+});
+
 // When a user selects the "PayPal" payment option, display the Paypal information, and hide the credit card information and the "Bitcoin" information.
 
 // When a user selects the "Bitcoin" payment option, display the Bitcoin information, and hide the credit card information.
 
 // Display error messages and don't let the user submit the form if any of these validation errors exist:
+const form = document.querySelector("form");
+form.addEventListener("submit", function(event) {
+	if (!isFormValid()) {
+		event.preventDefault();
+	}
+});
+
+function isFormValid() {
+	var valid = true;
+	valid = isNameValid() && valid;
+	valid = isEmailValid() && valid;
+	valid = isActivityValid() && valid;
+	valid = isPaymentOptionValid() && valid;
+	if (document.getElementById("payment").value === "credit card") {
+		valid = isCreditCardValid() && valid;
+	}
+	return valid;
+}
 
 // Name field can't be empty
+function isNameValid() {
+	const nameField = document.getElementById("name");
+	const valid = nameField.value !== "";
+	if (valid) {
+		nameField.style.borderColor = "";
+	} else {
+		nameField.style.borderColor = "red";
+	}
+	return valid;
+}
 
 // Email field must be a validly formatted e-mail address (you don't have to check that it's a real e-mail address, just that it's formatted like one: dave@teamtreehouse.com for example. You'll need to use a regular expression to get this requirement. See the list of Resources for links to learn about regular expressions.
+function isEmailValid() {
+	const emailField = document.getElementById("mail");
+	const valid =
+		emailField.value !== "" &&
+		/[\w\d]+@[\w\d]+\.[\w\d]+/.test(emailField.value);
+	if (valid) {
+		emailField.style.borderColor = "";
+	} else {
+		emailField.style.borderColor = "red";
+	}
+	return false;
+}
 
 // At least one activity must be checked from the list under "Register for Actitivities."
+function isActivityValid() {
+	const activityFieldTitle = document.querySelector(
+		".activities legend"
+	);
+	const valid =
+		document.querySelectorAll(
+			'.activities input[type="checkbox"]:checked'
+		).length !== 0;
+	if (valid) {
+		activityFieldTitle.style.color = "";
+	} else {
+		activityFieldTitle.style.color = "red";
+	}
+	return valid;
+}
 
 // Payment option must be selected.
+function isPaymentOptionValid() {
+	const paymentOptionLabel = document.querySelector('[for="payment"]');
+	const valid = paymentSection.value !== "select method";
+	if (valid) {
+		paymentOptionLabel.style.color = "";
+	} else {
+		paymentOptionLabel.style.color = "red";
+	}
+	return valid;
+}
 
 // If "Credit card" is the selected payment option, make sure the user supplied a credit card number, a zip code, and a 3 number CVV value.
+function isCreditCardValid() {
+	var valid = true;
+	valid = isCCNumberValid() && valid;
+	valid = isZipCodeValid() && valid;
+	valid = isCVVValid() && valid;
+	return valid;
+}
+
+function isCCNumberValid() {
+	const label = document.querySelector('[for="cc-num"]');
+	const valid = document.getElementById("cc-num").value !== "";
+	if (valid) {
+		label.style.color = "";
+	} else {
+		label.style.color = "red";
+	}
+	return valid;
+}
+
+function isZipCodeValid() {
+	const label = document.querySelector('[for="zip"]');
+	const valid = document.getElementById("zip").value.length >= 5;
+	if (valid) {
+		label.style.color = "";
+	} else {
+		label.style.color = "red";
+	}
+	return valid;
+}
+
+function isCVVValid() {
+	const label = document.querySelector('[for="cvv"]');
+	const valid = document.getElementById("cvv").value.length === 3;
+	if (valid) {
+		label.style.color = "";
+	} else {
+		label.style.color = "red";
+	}
+	return valid;
+}
