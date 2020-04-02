@@ -14,10 +14,13 @@ https://www.w3schools.com/
 
 https://developer.mozilla.org/en-US/
 
+https://stackoverflow.com/
+
 as well as the study guide videos 
+
 Im looking for a meet expectations with this project!
 
-
+//////////////////////////////////////////////////////////////////////////////////
 I updated my code to reflect the comments below from the slack peer review channel:
 
 The "other" field doesn't seem to be working.  It's hidden when the page loads, but when I select "other" from the job role select menu, it should apear, but it doesn't.
