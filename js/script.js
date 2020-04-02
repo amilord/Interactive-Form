@@ -2,7 +2,21 @@
 document.getElementById("name").focus();
 
 // Reveal a text field when the "Other" option is selected from the "Job Role" drop down menu. Make sure you add an text input field. Use the id of "other-title" for the field. Add placeholder text of "Your Title" for the field
-document.getElementById("other-title").style.display = "none";
+var selectTitle = document.getElementById("title");
+var otherTitle = document.getElementById("other-title");
+
+// The "other" field doesn't seem to be working.  It's hidden when the page loads,
+// but when I select "other" from the job role select menu, it should apear, but it doesn't.
+
+otherTitle.style.display = "none";
+
+selectTitle.addEventListener("change", function(event) {
+	if (event.target.value == "other") {
+		otherTitle.style.display = "inline-block";
+	} else {
+		otherTitle.style.display = "none";
+	}
+});
 
 // For the T-Shirt color menu, only display the options that match the design selected in the "Design" menu.
 document.getElementById("design").childNodes[1].style.display = "none";
@@ -129,6 +143,11 @@ document.getElementById("paypal").style.display = "none";
 document.getElementById("bitcoin").style.display = "none";
 const paymentSection = document.getElementById("payment");
 paymentSection.childNodes[1].style.display = "none";
+
+// Since you have the error for not having a payment method selected, the credit card errors don't fire.   Once you change it up so "Credit Card"
+// is the selected payment method, I think this will work correctly.
+
+paymentSection.value = "credit card";
 paymentSection.addEventListener("change", function(event) {
 	const currentPaymentType = paymentSection.value;
 	if (currentPaymentType === "credit card") {
@@ -155,8 +174,16 @@ paymentSection.addEventListener("change", function(event) {
 // Display error messages and don't let the user submit the form if any of these validation errors exist:
 const form = document.querySelector("form");
 form.addEventListener("submit", function(event) {
+	// prevent the default submit and page reload
+	event.preventDefault();
 	if (!isFormValid()) {
-		event.preventDefault();
+		alert("invalid form");
+	} else {
+		// this is collecting all of the data once you press the submit button and putting it in the console log
+		for (var i = 0; i < form.elements.length; i++) {
+			var element = form.elements[i];
+			console.log(element.name, element.value);
+		}
 	}
 });
 
@@ -195,7 +222,7 @@ function isEmailValid() {
 	} else {
 		emailField.style.borderColor = "red";
 	}
-	return false;
+	return valid;
 }
 
 // At least one activity must be checked from the list under "Register for Actitivities."
@@ -238,7 +265,16 @@ function isCreditCardValid() {
 
 function isCCNumberValid() {
 	const label = document.querySelector('[for="cc-num"]');
-	const valid = document.getElementById("cc-num").value !== "";
+	const value = document.getElementById("cc-num").value;
+	var valid = false;
+	var parsedNumber = parseInt(value);
+	if (
+		value.length >= 13 &&
+		value.length <= 16 &&
+		parsedNumber == value
+	) {
+		valid = true;
+	}
 	if (valid) {
 		label.style.color = "";
 	} else {
@@ -249,7 +285,12 @@ function isCCNumberValid() {
 
 function isZipCodeValid() {
 	const label = document.querySelector('[for="zip"]');
-	const valid = document.getElementById("zip").value.length >= 5;
+	const value = document.getElementById("zip").value;
+	var valid = false;
+	var parsedNumber = parseInt(value);
+	if (value.length == 5 && parsedNumber == value) {
+		valid = true;
+	}
 	if (valid) {
 		label.style.color = "";
 	} else {
@@ -260,7 +301,13 @@ function isZipCodeValid() {
 
 function isCVVValid() {
 	const label = document.querySelector('[for="cvv"]');
-	const valid = document.getElementById("cvv").value.length === 3;
+	const value = document.getElementById("cvv").value;
+
+	var valid = false;
+	var parsedNumber = parseInt(value);
+	if (value.length == 3 && parsedNumber == value) {
+		valid = true;
+	}
 	if (valid) {
 		label.style.color = "";
 	} else {
