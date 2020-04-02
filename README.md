@@ -18,7 +18,7 @@ as well as the study guide videos
 Im looking for a meet expectations with this project!
 
 
-I update dmy code to reflect the comments below from the slack peer review channel:
+I updated my code to reflect the comments below from the slack peer review channel:
 
 The "other" field doesn't seem to be working.  It's hidden when the page loads, but when I select "other" from the job role select menu, it should apear, but it doesn't.
 By default when the page loads, the credit card method should be selected.  Right now, when the page loads, the credit card method is shown, but the select menu still says "Select Payment Method". One other issue I'm seeing is, if I pull up your page and "hit" register I expect to see error indicators for name, email, activities, and the 3 credit card fields. Since you have the error for not having a payment method selected, the credit card errors don't fire.   Once you change it up so "Credit Card" is the selected payment method, I think this will work correctly.
