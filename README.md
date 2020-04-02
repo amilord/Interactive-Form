@@ -18,10 +18,9 @@ as well as the study guide videos
 Im looking for a meet expectations with this project!
 
 
-I updatedmy code to reflect the comments below from slack:
+I update dmy code to reflect the comments below from the slack peer review channel:
 
 The "other" field doesn't seem to be working.  It's hidden when the page loads, but when I select "other" from the job role select menu, it should apear, but it doesn't.
 By default when the page loads, the credit card method should be selected.  Right now, when the page loads, the credit card method is shown, but the select menu still says "Select Payment Method". One other issue I'm seeing is, if I pull up your page and "hit" register I expect to see error indicators for name, email, activities, and the 3 credit card fields. Since you have the error for not having a payment method selected, the credit card errors don't fire.   Once you change it up so "Credit Card" is the selected payment method, I think this will work correctly.
 I am running into some issue with the validations for the credit card fields.  The CC Num field should be 13 to 16 digits long, but the validtion is only looking at whether the field is blank or not.  The Zip Code should only except exactly 5 digits, but your validation allows for 5 or more.  The CVV is looking for exactly 3, so that is good.  However, in addition to checking the length of these fields, they should be checking whether the values only contain numbers.
-Finally, I'm not actually able to submit the form.  I've tried with all 3 payment methods, and with all the fields filled out correctly, but I haven't been able to get it to submit.
 
