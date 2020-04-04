@@ -10,7 +10,7 @@ var otherTitle = document.getElementById("other-title");
 
 otherTitle.style.display = "none";
 
-selectTitle.addEventListener("change", function(event) {
+selectTitle.addEventListener("change", function (event) {
 	if (event.target.value == "other") {
 		otherTitle.style.display = "inline-block";
 	} else {
@@ -38,7 +38,7 @@ document.querySelectorAll('[value="tomato"]')[0].style.display = "none";
 document.querySelectorAll('[value="steelblue"]')[0].style.display = "none";
 document.querySelectorAll('[value="dimgrey"]')[0].style.display = "none";
 
-document.getElementById("design").addEventListener("change", function() {
+document.getElementById("design").addEventListener("change", function () {
 	var currentDesign = document.getElementById("design").value;
 	if (currentDesign === "js puns") {
 		document.querySelectorAll(
@@ -96,7 +96,7 @@ const activities = document.getElementsByClassName("activities")[0];
 activities.appendChild(totalElement);
 
 var activities_total = 0;
-activities.addEventListener("change", function(event) {
+activities.addEventListener("change", function (event) {
 	const selectedDayAndTime = event.target.getAttribute(
 		"data-day-and-time"
 	);
@@ -148,7 +148,7 @@ paymentSection.childNodes[1].style.display = "none";
 // is the selected payment method, I think this will work correctly.
 
 paymentSection.value = "credit card";
-paymentSection.addEventListener("change", function(event) {
+paymentSection.addEventListener("change", function (event) {
 	const currentPaymentType = paymentSection.value;
 	if (currentPaymentType === "credit card") {
 		document.getElementById("credit-card").style.display = "";
@@ -173,12 +173,10 @@ paymentSection.addEventListener("change", function(event) {
 
 // Display error messages and don't let the user submit the form if any of these validation errors exist:
 const form = document.querySelector("form");
-form.addEventListener("submit", function(event) {
+form.addEventListener("submit", function (event) {
 	// prevent the default submit and page reload
 	event.preventDefault();
 	if (!isFormValid()) {
-		alert("invalid form");
-	} else {
 		// this is collecting all of the data once you press the submit button and putting it in the console log
 		for (var i = 0; i < form.elements.length; i++) {
 			var element = form.elements[i];
