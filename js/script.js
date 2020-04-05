@@ -175,25 +175,26 @@ paymentSection.addEventListener("change", function (event) {
 const form = document.querySelector("form");
 form.addEventListener("submit", function (event) {
 	// prevent the default submit and page reload
-	event.preventDefault();
-	if (!isFormValid()) {
+	if (isFormValid()) {
 		// this is collecting all of the data once you press the submit button and putting it in the console log
 		for (var i = 0; i < form.elements.length; i++) {
 			var element = form.elements[i];
 			console.log(element.name, element.value);
 		}
-		document.getElementById("name").value = "";
-		document.getElementById("mail").value = "";
-		document.querySelector("#title").selectedIndex = 0;
-		document.querySelector("#size").selectedIndex = 0;
-		document.querySelector("#color").selectedIndex = 0;
-		document.querySelector("#payment").selectedIndex = 0;
+		// document.getElementById("name").value = "";
+		// document.getElementById("mail").value = "";
 		// document.querySelector("#title").selectedIndex = 0;
-		document.getElementById("cc-num").value = "";
-		document.getElementById("zip").value = "";
-		document.getElementById("cvv").value = "";
-		document.querySelector("#exp-month").selectedIndex = 0;
-		document.querySelector("#exp-year").selectedIndex = 0;
+		// document.querySelector("#size").selectedIndex = 0;
+		// document.querySelector("#color").selectedIndex = 0;
+		// document.querySelector("#payment").selectedIndex = 0;
+		// // document.querySelector("#title").selectedIndex = 0;
+		// document.getElementById("cc-num").value = "";
+		// document.getElementById("zip").value = "";
+		// document.getElementById("cvv").value = "";
+		// document.querySelector("#exp-month").selectedIndex = 0;
+		// document.querySelector("#exp-year").selectedIndex = 0;
+	} else {
+		event.preventDefault();
 	}
 });
 
