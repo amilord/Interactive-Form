@@ -213,7 +213,11 @@ function isFormValid() {
 // Name field can't be empty
 function isNameValid() {
 	const nameField = document.getElementById("name");
-	const valid = nameField.value !== "";
+
+	var name = nameField.value;
+	var trimmedName = name.trim();
+
+	const valid = trimmedName !== "";
 	if (valid) {
 		nameField.style.borderColor = "";
 	} else {
